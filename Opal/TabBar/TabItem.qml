@@ -44,6 +44,8 @@ import "private/Util.js" as Util
 SilicaControl {
     id: root
 
+    default property alias contents: bodyItem.data
+
     property int topMargin: parent._ctxTopMargin || _ctxTopMargin || 0
 
     property Flickable flickable
@@ -108,5 +110,16 @@ SilicaControl {
         interval: 30000
 
         onTriggered: root._tabContainer.DelegateModel.inPersistedItems = false
+    }
+
+    SilicaItem {
+        id: bodyItem
+        anchors {
+            top: parent.top
+            topMargin: root.topMargin
+        }
+
+        implicitWidth: parent.implicitWidth
+        implicitHeight: parent.implicitHeight - parent.topMargin
     }
 }
