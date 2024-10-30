@@ -42,6 +42,7 @@ import QtQuick 2.4
 import Sailfish.Silica 1.0
 import Sailfish.Silica.private 1.0
 import "private/Util.js" as Util
+import "private"
 
 PagedView {
     id: root
@@ -55,7 +56,7 @@ PagedView {
     property string sourceProperty: "modelData"
 
     property real yOffset: currentItem && currentItem._yOffset || 0
-    property alias _headerBackgroundVisible: backgroundRectangle.visible
+    property bool _headerBackgroundVisible: true
 
     property Item _page: Util.findPage(root)
 
@@ -77,16 +78,20 @@ PagedView {
         z: root.yOffset < 0 && !root.hasFooter ? -1 : 1
         y: root.hasFooter ? root.height - tabBarLoader.height : Math.max(0, -root.yOffset)
 
-        BackgroundRectangle {
-            id: backgroundRectangle
-            anchors.fill: parent
-            anchors.topMargin: (root.yOffset > Theme.paddingSmall) || root.hasFooter ?  0 : Theme.paddingSmall
-            anchors.rightMargin: Theme.paddingSmall
-            color: __silica_applicationwindow_instance._backgroundColor
+        Item {
+            id: backgroundRectangleContainer
+            property Item item
+
+            anchors {
+                fill: parent
+                topMargin: (root.yOffset > Theme.paddingSmall) || root.hasFooter
+                    ? 0 : Theme.paddingSmall
+                rightMargin: Theme.paddingSmall
+            }
         }
     }
 
-    delegate: AnimatedLoader {
+    delegate: Loader {
         // tab container
         id: tabLoader
 
@@ -95,41 +100,26 @@ PagedView {
 
         property bool loading: Qt.application.active && isCurrentItem && status === AnimatedLoader.Loading
 
-        source: model[root.sourceProperty]
 
+//        sourceComponent: model[root.sourceProperty]
         asynchronous: true
-        animating: tabFadeAnimation.running
 
         width: item ? item.implicitWidth : root.contentItem.width
         height: item ? item.implicitHeight : root.contentItem.height
 
-        onAnimate: {
-            if (item) {
-                item.opacity = 0
-                tabFadeAnimation.target = item
-                tabFadeAnimation.from = 0
-                tabFadeAnimation.to = 1
-                tabFadeAnimation.restart()
-            } else if (replacedItem) {
-                tabFadeAnimation.target = replacedItem
-                tabFadeAnimation.from = 1
-                tabFadeAnimation.to = 0
-                tabFadeAnimation.restart()
-            }
-        }
-
-        onInitializeItem: {
+        onItemChanged: {
+            if (!item) return
+            tabFadeAnimation.target = null
             item.focus = true
-            if (item.hasOwnProperty("_tabContainer")) {
-                item._tabContainer = tabLoader
-            }
+            item.opacity = 0
+            tabFadeAnimation.target = item
+            tabFadeAnimation.from = 0
+            tabFadeAnimation.to = 1
+            tabFadeAnimation.restart()
         }
-
-        onCompleteAnimation: tabFadeAnimation.complete()
 
         FadeAnimation {
             id: tabFadeAnimation
-
             running: false
         }
 
@@ -148,5 +138,23 @@ PagedView {
                 running: tabLoader.loading
             }
         }
+    }
+
+    Component.onCompleted: {
+        // Avoid hard dependency on private Silica components
+        backgroundRectangleContainer.item = Qt.createQmlObject("\
+            import QtQuick 2.6
+            import %1 1.0
+
+            BackgroundRectangle {
+                id: backgroundRectangle
+                visible: _headerBackgroundVisible
+                anchors.fill: parent
+                color: __silica_applicationwindow_instance._backgroundColor
+            }
+        ".arg('Sailfish.Silica.private'),
+            backgroundRectangleContainer,
+            'BackgroundRectangle'
+        )
     }
 }

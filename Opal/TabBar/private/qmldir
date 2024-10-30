@@ -3,3 +3,4 @@ module Opal.TabBar.private
 # SPDX-FileCopyrightText: 2023-2024 Mirian Margiani
 # SPDX-License-Identifier: GPL-3.0-or-later
 Util 1.0 Util.js
+ColorInterpolator 1.0 ColorInterpolator.qml
