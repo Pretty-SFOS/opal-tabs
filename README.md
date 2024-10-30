@@ -9,6 +9,14 @@ QML module for adding tab bars to Sailfish apps
 
 This module provides an easy way to add tab bars to apps.
 
+## Status
+
+The module is usable but it is not yet documented. All options can be seen in
+the examples, though.
+
+Silica's `PushUpMenu` (bottom menu) is not yet properly supported with
+bottom-aligned tabs. `PullDownMenu` (top menu) is fully supported.
+
 
 ## Usage
 
