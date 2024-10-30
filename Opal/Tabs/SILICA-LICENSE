@@ -1,4 +1,4 @@
-//@ This file is part of Opal.TabBar.
+//@ This file is part of Opal.Tabs.
 //@ SPDX-FileCopyrightText: 2024 Mirian Margiani
 //@ SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -7,7 +7,7 @@ the Sailfish Silica UI component package. The license text has been extracted
 from the files to save disk space but the original individual copyright notices
 are still in each file.
 
-This text is the standard BSD-3-Clause license. The Opal.TabBar module however,
+This text is the standard BSD-3-Clause license. The Opal.Tabs module however,
 with all modifications to Silica files, is published under GPL-3.0-or-later.
 
 /****************************************************************************************

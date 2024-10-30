@@ -15,11 +15,11 @@ version: 1.0.0
 
 # plain name as used in the module repository URL, will be prefixed with "opal-"
 # where necessary
-name: tabbar
+name: tabs
 
 # styled name including capitalisation etc., will be prefixed with "Opal."
 # where necessary
-nameStyled: TabBar
+nameStyled: Tabs
 
 # very short description of this module: must be plain text without formatting
 # and should be as short as possible. This text may be used as the description

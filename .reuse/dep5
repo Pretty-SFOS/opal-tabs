@@ -1,10 +1,10 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Opal.TabBar
+Upstream-Name: Opal.Tabs
 Upstream-Contact: Mirian Margiani <mixosaurus+ichthyo@pm.me>
-Source: https://github.com/Pretty-SFOS/opal-tabbar
+Source: https://github.com/Pretty-SFOS/opal-tabs
 
 Files: translations/*
-Copyright: Opal.TabBar translations contributors
+Copyright: Opal.Tabs translations contributors
 License: GPL-3.0-or-later
 
 Files: doc/screenshot-*.webp

@@ -9,7 +9,7 @@ Copy this repository to setup a new Opal module.
 
 1. Create a local copy of the contents of this repository.
 2. Run `setup.sh` and follow the instructions.
-3. Import your source code to `Opal/TabBar/` and write documentation.
+3. Import your source code to `Opal/Tabs/` and write documentation.
 4. Add an example to `README.md`.
 5. Update `release-module.sh`: if your module has no translations, set `cTRANSLATE=(Opal)` to `cTRANSLATE=()`
 5. Remove this introduction from `README.md`.
@@ -18,7 +18,7 @@ Copy this repository to setup a new Opal module.
 
 <hr>
 
-# TabBar
+# Tabs
 
 QML module for adding tab bars to Sailfish apps
 
@@ -30,7 +30,7 @@ This module provides an easy way to add tab bars to apps.
 ```{qml}
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Opal.TabBar 1.0
+import Opal.Tabs 1.0
 
 MyComponent {
     // ...

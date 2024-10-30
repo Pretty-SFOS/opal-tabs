@@ -1,4 +1,4 @@
-//@ This file is part of Opal.TabBar.
+//@ This file is part of Opal.Tabs.
 //@ SPDX-FileCopyrightText: 2024 Mirian Margiani
 //@ SPDX-FileCopyrightText: Copyright (C) 2019 - 2020 Open Mobile Platform LLC.
 //@ SPDX-License-Identifier: GPL-3.0-or-later
