@@ -90,6 +90,15 @@ SilicaControl {
             }
         }
 
+    Binding {
+        target: !!flickable && flickable.pullDownMenu ?
+            flickable.pullDownMenu : null
+        property: "y"
+        value: flickable.originY
+               - flickable.pullDownMenu.height
+               - root.topMargin
+               + (_page.orientation & Orientation.PortraitMask ?
+                      0 : Theme.paddingMedium)
     }
 
     Timer {
