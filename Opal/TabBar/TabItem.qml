@@ -71,6 +71,17 @@ SilicaControl {
         if (_tabContainer) {
             _tabContainer.DelegateModel.inPersistedItems = true
         }
+
+        if (!flickable) {
+            for (var child in children) {
+                if (child.hasOwnProperty('maximumFlickVelocity') &&
+                        !child.hasOwnProperty('__silica_hidden_flickable')) {
+                    flickable = child
+                    break
+                }
+            }
+        }
+
     }
 
     Timer {
