@@ -65,6 +65,10 @@ PagedView {
 
     property int __silica_tab_view
 
+    header: TabBar {
+        model: root.model
+    }
+
     verticalAlignment: hasFooter ? PagedView.AlignTop : PagedView.AlignBottom
     cacheSize: 0
 
