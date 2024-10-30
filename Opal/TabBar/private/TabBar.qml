@@ -97,7 +97,7 @@ SilicaControl {
             var tabButton = root._currentTabButton
             if (tabButton) {
                 x = Math.max(0, Math.min(
-                            contentWidth - width, tabButton.x + ((tabButton.width - width) / 2)));
+                            contentWidth - width, tabButton.x + ((tabButton.width - width) / 2)))
 
                 var anchoredButton = root._anchoredTabButton
                 if (anchoredButton) {
@@ -210,15 +210,24 @@ SilicaControl {
 
             Behavior on x {
                 enabled: contentXBehavior.enabled
-                SmoothedAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                SmoothedAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
             }
             Behavior on y {
                 enabled: contentXBehavior.enabled
-                SmoothedAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                SmoothedAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
             }
             Behavior on width {
                 enabled: contentXBehavior.enabled
-                SmoothedAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                SmoothedAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     }
