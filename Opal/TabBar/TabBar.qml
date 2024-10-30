@@ -55,6 +55,7 @@ SilicaControl {
             ? (tabRow.children, _tabButtons.itemAt(_currentIndex))
             : null
 
+    // FIXME this is broken because _tabView._distance does not exist
     readonly property real _normalizedDragDistance: _tabView && _tabView.dragging
             ? _tabView._distance / _tabView.width + _tabView.horizontalSpacing
             : 0
