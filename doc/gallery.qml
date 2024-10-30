@@ -5,51 +5,53 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0 as S
-import Opal.Tabs 1.0 as M
+import Opal.Tabs 1.0 as T
+import "gallery"
 
 S.Page {
     id: root
     allowedOrientations: S.Orientation.All
 
-    S.SilicaFlickable {
-        id: flick
+    property bool enableIcons: false
+    property bool enableDescriptions: false
+    property alias tabBarPosition: tabs.tabBarPosition
+    property alias tabBarVisible: tabs.tabBarVisible
+
+    T.TabView {
+        id: tabs
         anchors.fill: parent
-        contentHeight: column.height + S.Theme.horizontalPageMargin
+        currentIndex: 1
+        tabBarPosition: Qt.AlignTop
 
-        S.VerticalScrollDecorator { flickable: flick }
+        T.Tab {
+            title: qsTr("Chats")
+            icon: enableIcons ? "image://theme/icon-m-repeat" : ""
+            description: enableDescriptions ?
+                qsTr("7 unread") : ""
 
-        Column {
-            id: column
-            width: parent.width
-            spacing: S.Theme.paddingMedium
+            Component { DummyTab {} }
+        }
 
-            S.PageHeader {
-                title: qsTr("Example Page")
+        T.Tab {
+            title: qsTr("Overview")
+            icon: enableIcons ? "image://theme/icon-m-acknowledge" : ""
+            description: enableDescriptions ?
+                qsTr("Nothing to do") : ""
+
+            Component {
+                OptionsTab {
+                    page: root
+                }
             }
+        }
 
-            S.SectionHeader {
-                text: qsTr("Basic usage")
-            }
+        T.Tab {
+            title: qsTr("Tasks")
+            icon: enableIcons ? "image://theme/icon-m-company" : ""
+            description: enableDescriptions ?
+                qsTr("59 open") : ""
 
-            S.Label {
-                x: S.Theme.horizontalPageMargin
-                width: root.width - 2*x
-                wrapMode: Text.Wrap
-                text: qsTr("This is how to use the new component.")
-                color: S.Theme.highlightColor
-            }
-
-            S.SectionHeader {
-                text: qsTr("Advanced usage")
-            }
-
-            S.Label {
-                x: S.Theme.horizontalPageMargin
-                width: root.width - 2*x
-                wrapMode: Text.Wrap
-                text: qsTr("This is a more complex scenario.")
-                color: S.Theme.highlightColor
-            }
+            Component { DummyTab {} }
         }
     }
 }

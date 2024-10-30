@@ -11,14 +11,58 @@ T.TabItem {
     id: root
     flickable: flick
 
+    property Item page
+
     S.SilicaFlickable {
         id: flick
         anchors.fill: parent
+        contentHeight: column.height
 
-        S.ViewPlaceholder {
-            enabled: true
-            text: qsTranslate("EmptyDummyPage", "Dummy page")
-            hintText: qsTranslate("EmptyDummyPage", "Other contents could be included at this place.")
+        Column {
+            id: column
+            width: parent.width
+
+            S.PageHeader {
+                title: qsTr("Options")
+            }
+
+            S.TextSwitch {
+                text: qsTr("Show icons")
+                automaticCheck: false
+                checked: page.enableIcons
+                onClicked: page.enableIcons = !page.enableIcons
+            }
+
+            S.TextSwitch {
+                text: qsTr("Show descriptions")
+                automaticCheck: false
+                checked: page.enableDescriptions
+                onClicked: page.enableDescriptions = !page.enableDescriptions
+            }
+
+            S.TextSwitch {
+                text: qsTr("Show tab bar")
+                automaticCheck: false
+                checked: page.tabBarVisible
+                onClicked: page.tabBarVisible = !page.tabBarVisible
+            }
+
+            S.ComboBox {
+                label: qsTr("Tab bar position")
+                onCurrentIndexChanged: {
+                    page.tabBarPosition = (
+                        currentIndex == 0 ? Qt.AlignTop : Qt.AlignBottom)
+                }
+
+                menu: S.ContextMenu {
+                    S.MenuItem {
+                        text: qsTr("Top")
+                    }
+                    S.MenuItem {
+                        text: qsTr("Bottom")
+                    }
+                }
+            }
         }
     }
 }
