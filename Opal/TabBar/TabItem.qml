@@ -77,7 +77,7 @@ SilicaControl {
     clip: !flickable || !flickable.pullDownMenu
 
     Component.onCompleted: {
-        if (_tabContainer) {
+        if (_tabContainer && !!_tabContainer.DelegateModel) {
             _tabContainer.DelegateModel.inPersistedItems = true
         }
 
@@ -109,7 +109,11 @@ SilicaControl {
         running: root.allowDeletion && root._tabContainer && !root._tabContainer.PagedView.exposed
         interval: 30000
 
-        onTriggered: root._tabContainer.DelegateModel.inPersistedItems = false
+        onTriggered: {
+            if (!!_tabContainer && !!_tabContainer.DelegateModel) {
+                _tabContainer.DelegateModel.inPersistedItems = false
+            }
+        }
     }
 
     SilicaItem {
