@@ -47,6 +47,9 @@ import "private"
 PagedView {
     id: root
 
+    default property alias items: itemContainer.data
+    model: items
+
     property Component header
     property Component footer
     property bool hasFooter: footer
@@ -68,6 +71,16 @@ PagedView {
     contentItem {
         y: root.hasFooter ? 0 : tabBarLoader.height
         height: root.height - tabBarLoader.height
+    }
+
+    Item {
+        id: itemContainer
+        width: 0
+        height: 0
+
+        property Item _ctxPage: _page
+        property Item _ctxTabContainer: root
+        property int _ctxTopMargin: tabBarHeight
     }
 
     Loader {
