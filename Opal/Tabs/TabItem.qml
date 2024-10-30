@@ -29,6 +29,9 @@ SilicaControl {
             : 0
     property alias _cacheExpiry: cleanupTimer.interval
 
+    property bool _hasPullDownMenu: !!flickable && !!flickable.pullDownMenu
+    property bool _hasPushUpMenu: !!flickable && !!flickable.pushUpMenu
+
     implicitWidth: _tabContainer ? _tabContainer.PagedView.contentWidth : 0
     implicitHeight: {
         if (!_tabContainer) {
@@ -63,7 +66,7 @@ SilicaControl {
     }
 
     Binding {
-        target: !!flickable && flickable.pullDownMenu ?
+        target: !!flickable && !!flickable.pullDownMenu ?
                     flickable.pullDownMenu : null
         property: "y"
         when: topMargin > 0
@@ -125,12 +128,12 @@ SilicaControl {
         id: bodyItem
         anchors {
             top: parent.top
-            topMargin: root.topMargin
+            topMargin: _hasPullDownMenu ? root.topMargin : 0
         }
 
         implicitWidth: parent.implicitWidth
         implicitHeight: parent.implicitHeight
-                        - parent.topMargin
+                        - anchors.topMargin
                         - parent.bottomMargin
     }
 }
