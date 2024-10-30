@@ -44,11 +44,15 @@ import "private/Util.js" as Util
 SilicaControl {
     id: root
 
+    property int topMargin: parent._ctxTopMargin || _ctxTopMargin || 0
+
     property Flickable flickable
     property bool allowDeletion: true
     readonly property bool isCurrentItem: _tabContainer && _tabContainer.PagedView.isCurrentItem
 
-    property Item _tabContainer: root
+    property Item _tabContainer: parent._ctxTabContainer || _ctxTabContainer || root
+    property Item _page: parent._ctxPage || _ctxPage
+
     readonly property real _yOffset: flickable && flickable.pullDownMenu
             ? flickable.contentY - flickable.originY
             : 0

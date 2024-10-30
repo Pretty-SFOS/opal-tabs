@@ -95,13 +95,17 @@ PagedView {
         // tab container
         id: tabLoader
 
+        // properties are passed on to the TabItem that is being loaded
+        property Item _ctxTabContainer: tabLoader
+        property int _ctxTopMargin: tabBarHeight
+        property Item _ctxPage: root._page
         readonly property bool isCurrentItem: PagedView.isCurrentItem
         readonly property real _yOffset: item && item._yOffset || 0
 
-        property bool loading: Qt.application.active && isCurrentItem && status === AnimatedLoader.Loading
-
+        property bool loading: Qt.application.active && isCurrentItem && status === /*Animated*/Loader.Loading
 
 //        sourceComponent: model[root.sourceProperty]
+        sourceComponent: model.modelData.body
         asynchronous: true
 
         width: item ? item.implicitWidth : root.contentItem.width
