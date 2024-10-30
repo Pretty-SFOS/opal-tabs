@@ -56,7 +56,7 @@ PagedView {
     property alias tabBarItem: tabBarLoader.item
     property real tabBarHeight: tabBarItem ? tabBarItem.height : 0
 
-    property string sourceProperty: "modelData"
+//    property string sourceProperty: "modelData"
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
