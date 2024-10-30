@@ -3,21 +3,6 @@ SPDX-FileCopyrightText: 2023-2024 Mirian Margiani
 SPDX-License-Identifier: GFDL-1.3-or-later
 -->
 
-# Template for new Opal modules
-
-Copy this repository to setup a new Opal module.
-
-1. Create a local copy of the contents of this repository.
-2. Run `setup.sh` and follow the instructions.
-3. Import your source code to `Opal/Tabs/` and write documentation.
-4. Add an example to `README.md`.
-5. Update `release-module.sh`: if your module has no translations, set `cTRANSLATE=(Opal)` to `cTRANSLATE=()`
-5. Remove this introduction from `README.md`.
-6. Add screenshots to `doc/` and update `README.md` accordingly.
-7. Run `./release-module.sh` to build docs and create a release bundle.
-
-<hr>
-
 # Tabs
 
 QML module for adding tab bars to Sailfish apps
@@ -32,8 +17,41 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Opal.Tabs 1.0
 
-MyComponent {
-    // ...
+Page {
+    id: root
+    allowedOrientations: S.Orientation.All
+
+    TabView {
+        anchors.fill: parent
+        tabBarPosition: Qt.AlignBottom
+
+        Tab {
+            title: qsTr("Alarms")
+
+            Component {
+                TabItem {
+                    flickable: flick
+
+                    SilicaFlickable {
+                        id: flick
+                        anchors.fill: parent
+
+                        // ...
+                    }
+                }
+            }
+        }
+
+        Tab {
+            title: qsTr("Stopwatch")
+
+            Component {
+                TabItem {
+                    // ...
+                }
+            }
+        }
+    }
 }
 ```
 
