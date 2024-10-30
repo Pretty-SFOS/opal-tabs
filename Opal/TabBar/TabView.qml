@@ -47,6 +47,8 @@ PagedView {
     id: root
 
     property int tabBarPosition: Qt.AlignTop
+    property bool tabBarVisible: true
+
     property bool _tabBarIsTop: tabBarPosition == Qt.AlignTop
 
     default property alias items: itemContainer.data
@@ -56,7 +58,8 @@ PagedView {
     property Component footer
     property bool hasFooter: footer
     property alias tabBarItem: tabBarLoader.item
-    property real tabBarHeight: tabBarItem ? tabBarItem.height : 0
+    property real tabBarHeight: tabBarItem && tabBarVisible ?
+                                    tabBarItem.height : 0
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
@@ -98,6 +101,7 @@ PagedView {
     Loader {
         id: tabBarLoader
 
+        visible: root.tabBarVisible
         sourceComponent: root.hasFooter ? root.footer : root.header
         width: parent.width
         z: root.yOffset < 0 && !root.hasFooter ? -1 : 1
