@@ -46,6 +46,9 @@ import "private"
 PagedView {
     id: root
 
+    property int tabBarPosition: Qt.AlignTop
+    property bool _tabBarIsTop: tabBarPosition == Qt.AlignTop
+
     default property alias items: itemContainer.data
     model: items
 
@@ -62,9 +65,8 @@ PagedView {
 
     property int __silica_tab_view
 
-    header: TabBar {
-        model: root.model
-    }
+    header: _tabBarIsTop ? tabBarComponent : null
+    footer: _tabBarIsTop ? null : tabBarComponent
 
     verticalAlignment: hasFooter ? PagedView.AlignTop : PagedView.AlignBottom
     cacheSize: 0
@@ -80,8 +82,17 @@ PagedView {
         height: 0
 
         property Item _ctxPage: _page
-        property Item _ctxTabContainer: root
-        property int _ctxTopMargin: tabBarHeight
+        property Item _ctxTabContainer: parent
+        property int _ctxTopMargin: _tabBarIsTop ? tabBarHeight : 0
+        property int _ctxBottomMargin: _tabBarIsTop ? 0 : tabBarHeight
+    }
+
+    Component {
+        id: tabBarComponent
+
+        TabBar {
+            model: root.model
+        }
     }
 
     Loader {
@@ -115,9 +126,10 @@ PagedView {
         id: tabLoader
 
         // properties are passed on to the TabItem that is being loaded
-        property Item _ctxTabContainer: tabLoader
-        property int _ctxTopMargin: tabBarHeight
         property Item _ctxPage: root._page
+        property Item _ctxTabContainer: tabLoader
+        property int _ctxTopMargin: _tabBarIsTop ? tabBarHeight : 0
+        property int _ctxBottomMargin: _tabBarIsTop ? 0 : tabBarHeight
         readonly property bool isCurrentItem: PagedView.isCurrentItem
         readonly property real _yOffset: item && item._yOffset || 0
 

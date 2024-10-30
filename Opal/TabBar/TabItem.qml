@@ -46,6 +46,7 @@ SilicaControl {
     default property alias contents: bodyItem.data
 
     property int topMargin: parent._ctxTopMargin || _ctxTopMargin || 0
+    property int bottomMargin: parent._ctxBottomMargin || _ctxBottomMargin || 0
 
     property Flickable flickable
     property bool allowDeletion: true
@@ -66,7 +67,7 @@ SilicaControl {
         } else {
             var view = flickable && flickable.pullDownMenu ? _tabContainer.PagedView.view : null
 
-            return view && !view.hasFooter ? view.height : _tabContainer.PagedView.contentHeight
+            return view/* && !view.hasFooter*/ ? view.height : _tabContainer.PagedView.contentHeight
         }
     }
 
@@ -74,7 +75,7 @@ SilicaControl {
     // it is fully loaded by TabView
     opacity: 0
 
-    clip: !flickable || !flickable.pullDownMenu
+//    clip: !flickable || !flickable.pullDownMenu
 
     Component.onCompleted: {
         if (_tabContainer && !!_tabContainer.DelegateModel) {
@@ -94,14 +95,36 @@ SilicaControl {
 
     Binding {
         target: !!flickable && flickable.pullDownMenu ?
-            flickable.pullDownMenu : null
+                    flickable.pullDownMenu : null
         property: "y"
+        when: topMargin > 0
         value: flickable.originY
                - flickable.pullDownMenu.height
                - root.topMargin
                + (_page.orientation & Orientation.PortraitMask ?
                       0 : Theme.paddingMedium)
     }
+
+//    Binding {
+//        target: !!flickable && flickable.pushUpMenu ?
+//            flickable.pushUpMenu : null
+//        property: "y"
+//        when: bottomMargin > 0
+//        value: flickable.originY
+//               + flickable.contentHeight
+//               + flickable.pushUpMenu._contentDeficit
+//               + root.bottomMargin
+//               - (_page.orientation & Orientation.PortraitMask ?
+//                      0 : Theme.paddingMedium)
+//    }
+
+//    Binding {
+//        target: !!flickable && flickable.pushUpMenu ?
+//            flickable.pushUpMenu : null
+//        property: "bottomMargin"
+//        when: bottomMargin > 0
+//        value: bottomMargin + Theme.itemSizeMedium
+//    }
 
     Timer {
         id: cleanupTimer
@@ -124,6 +147,8 @@ SilicaControl {
         }
 
         implicitWidth: parent.implicitWidth
-        implicitHeight: parent.implicitHeight - parent.topMargin
+        implicitHeight: parent.implicitHeight
+                        - parent.topMargin
+                        - parent.bottomMargin
     }
 }
