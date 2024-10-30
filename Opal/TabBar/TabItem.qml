@@ -67,7 +67,7 @@ SilicaControl {
         } else {
             var view = flickable && flickable.pullDownMenu ? _tabContainer.PagedView.view : null
 
-            return view/* && !view.hasFooter*/ ? view.height : _tabContainer.PagedView.contentHeight
+            return view ? view.height : _tabContainer.PagedView.contentHeight
         }
     }
 
@@ -75,7 +75,7 @@ SilicaControl {
     // it is fully loaded by TabView
     opacity: 0
 
-//    clip: !flickable || !flickable.pullDownMenu
+    clip: !flickable || !flickable.pullDownMenu || !flickable.pushUpMenu
 
     Component.onCompleted: {
         if (_tabContainer && !!_tabContainer.DelegateModel) {
@@ -105,26 +105,38 @@ SilicaControl {
                       0 : Theme.paddingMedium)
     }
 
-//    Binding {
-//        target: !!flickable && flickable.pushUpMenu ?
-//            flickable.pushUpMenu : null
-//        property: "y"
-//        when: bottomMargin > 0
-//        value: flickable.originY
-//               + flickable.contentHeight
-//               + flickable.pushUpMenu._contentDeficit
-//               + root.bottomMargin
-//               - (_page.orientation & Orientation.PortraitMask ?
-//                      0 : Theme.paddingMedium)
-//    }
+    // FIXME If the tab bar is at the bottom and the view has
+    // a PushUpMenu, it gets positioned above the tab bar.
+    // This is ugly and inconsistent: it should be placed below
+    // the tab bar just as when the tab bar is at the top.
+    //
+    // It is possible to position the menu at the bottom of
+    // the screen but then it is impossible to pull it open.
+    // It is better to have it ugly and working, than nice
+    // but broken.
 
-//    Binding {
-//        target: !!flickable && flickable.pushUpMenu ?
-//            flickable.pushUpMenu : null
-//        property: "bottomMargin"
-//        when: bottomMargin > 0
-//        value: bottomMargin + Theme.itemSizeMedium
-//    }
+    /*
+    Binding {
+        target: !!flickable && flickable.pushUpMenu ?
+            flickable.pushUpMenu : null
+        property: "y"
+        when: bottomMargin > 0
+        value: flickable.originY
+               + flickable.contentHeight
+               + flickable.pushUpMenu._contentDeficit
+               + root.bottomMargin
+               - (_page.orientation & Orientation.PortraitMask ?
+                      0 : Theme.paddingMedium)
+    }
+
+    Binding {
+        target: !!flickable && flickable.pushUpMenu ?
+            flickable.pushUpMenu : null
+        property: "bottomMargin"
+        when: bottomMargin > 0
+        value: bottomMargin + Theme.itemSizeMedium
+    }
+    */
 
     Timer {
         id: cleanupTimer
