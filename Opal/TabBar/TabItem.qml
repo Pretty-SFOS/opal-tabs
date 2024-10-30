@@ -69,6 +69,10 @@ SilicaControl {
         }
     }
 
+    // TabItem is transparent by default and is faded in when
+    // it is fully loaded by TabView
+    opacity: 0
+
     clip: !flickable || !flickable.pullDownMenu
 
     Component.onCompleted: {
