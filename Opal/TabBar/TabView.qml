@@ -40,7 +40,6 @@
 
 import QtQuick 2.4
 import Sailfish.Silica 1.0
-import Sailfish.Silica.private 1.0
 import "private/Util.js" as Util
 import "private"
 
@@ -55,8 +54,6 @@ PagedView {
     property bool hasFooter: footer
     property alias tabBarItem: tabBarLoader.item
     property real tabBarHeight: tabBarItem ? tabBarItem.height : 0
-
-//    property string sourceProperty: "modelData"
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
@@ -121,7 +118,6 @@ PagedView {
 
         property bool loading: Qt.application.active && isCurrentItem && status === /*Animated*/Loader.Loading
 
-//        sourceComponent: model[root.sourceProperty]
         sourceComponent: model.modelData.body
         asynchronous: true
 

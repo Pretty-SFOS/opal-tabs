@@ -38,10 +38,9 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-//import Sailfish.Silica.private 1.0
 import "Util.js" as Util
 
-/*Silica*/MouseArea {
+MouseArea {
     id: root
 
     property int tabIndex: (model && model.index !== undefined) ? model.index : -1
