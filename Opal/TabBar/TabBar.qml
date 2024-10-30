@@ -77,6 +77,7 @@ SilicaControl {
             : null
 
     property string titleRole: "title"
+    property string descriptionRole: "description"
     property string countRole: "count"
     property string iconRole: "icon"
 
@@ -159,10 +160,12 @@ SilicaControl {
 
                     _tabView: root._tabView
                     _extraMargin: tabRow.extraMargin
+
                     tabCount: _tabButtons.count
                     titleFontSize: tabRow.buttonFontSize
 
                     title: model[root.titleRole] || ""
+                    description: model[root.descriptionRole] || ""
                     icon.source: model[root.iconRole] || ""
                     count: model[root.countRole] || ""
                 }

@@ -49,6 +49,7 @@ import "Util.js" as Util
     property bool isCurrentTab: _tabView && _tabView.currentIndex >= 0 && _tabView.currentIndex === tabIndex
 
     property alias title: titleLabel.text
+    property alias description: descriptionLabel.text
     property alias icon: highlightImage
 
     property int titleFontSize: parent && parent.buttonFontSize || Theme.fontSizeLarge
@@ -100,6 +101,13 @@ import "Util.js" as Util
         }
     }
 
+    ColorInterpolator {
+        id: secondaryColorInterpolator
+        from: Theme.secondaryColor
+        to: Theme.secondaryHighlightColor
+        progress: colorInterpolator.progress
+    }
+
     Column {
         id: contentColumn
 
@@ -129,6 +137,14 @@ import "Util.js" as Util
             x: (contentColumn.width - width) / 2
             color: highlighted ? Theme.highlightColor : colorInterpolator.value
             font.pixelSize: highlightImage.status === Image.Ready ? Theme.fontSizeTiny : root.titleFontSize
+        }
+
+        Label {
+            id: descriptionLabel
+
+            x: (contentColumn.width - width) / 2
+            color: highlighted ? Theme.secondaryHighlightColor : secondaryColorInterpolator.value
+            font.pixelSize: highlightImage.status === Image.Ready ? Theme.fontSizeTiny : 0.8 * root.titleFontSize
         }
     }
 
