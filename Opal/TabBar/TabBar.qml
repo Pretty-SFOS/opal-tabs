@@ -38,8 +38,7 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-import Sailfish.Silica.private 1.0
-import "private/Util.js" as Util
+import "Util.js" as Util
 
 SilicaControl {
     id: root
@@ -68,6 +67,7 @@ SilicaControl {
             return 0
         }
     }
+
     readonly property Item _anchoredTabButton: _dragDirection != 0
                 && _currentIndex >= 0 && _currentIndex < _tabButtons.count
             ? _tabButtons.itemAt(_dragDirection < 0
