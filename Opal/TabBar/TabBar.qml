@@ -38,6 +38,7 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import Nemo.Configuration 1.0
 import "Util.js" as Util
 
 SilicaControl {
@@ -48,8 +49,7 @@ SilicaControl {
     readonly property Item _tabView: Util.findParentWithProperty(root, '__silica_tab_view')
     property bool _oversize: flickable.contentWidth > flickable.width
     property bool _isFooter: _tabView && _tabView.hasFooter
-    readonly property bool _vanillaStyle: !_styleConfig || _styleConfig.value === "vanilla"
-    property QtObject _styleConfig
+    readonly property bool _vanillaStyle: tabBarStyle.value === "vanilla"
     readonly property int _currentIndex: _tabView ? _tabView.currentIndex : 0
     readonly property Item _currentTabButton: _currentIndex >= 0 && _currentIndex < _tabButtons.count
             ? (tabRow.children, _tabButtons.itemAt(_currentIndex))
@@ -266,17 +266,9 @@ SilicaControl {
         font.pixelSize: Theme.fontSizeTiny
     }
 
-
-    Component.onCompleted: {
-        // Avoid hard dependency to Configuration module
-        _styleConfig = Qt.createQmlObject("import Nemo.Configuration 1.0;
-                                        import QtQuick 2.0;
-
-                                        ConfigurationValue {
-                                            id: tabBarStyle
-                                            key: '/desktop/sailfish/silica/tab_bar_style'
-                                            defaultValue: 'vanilla'
-                                        }", root, 'TabStyleConfig')
+    ConfigurationValue {
+        id: tabBarStyle
+        key: '/desktop/sailfish/silica/tab_bar_style'
+        defaultValue: 'vanilla'
     }
-
 }
