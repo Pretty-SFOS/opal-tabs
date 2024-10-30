@@ -41,7 +41,7 @@
 import QtQuick 2.4
 import Sailfish.Silica 1.0
 import Sailfish.Silica.private 1.0
-import "Util.js" as Util
+import "private/Util.js" as Util
 
 PagedView {
     id: root

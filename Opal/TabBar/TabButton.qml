@@ -39,7 +39,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import Sailfish.Silica.private 1.0
-import "Util.js" as Util
+import "private/Util.js" as Util
 
 SilicaMouseArea {
     id: root
