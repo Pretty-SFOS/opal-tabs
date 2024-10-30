@@ -100,7 +100,12 @@ PagedView {
                 fill: parent
                 topMargin: (root.yOffset > Theme.paddingSmall) || root.hasFooter
                     ? 0 : Theme.paddingSmall
-                rightMargin: Theme.paddingSmall
+
+                // FIXME Why was this here in the original code?
+                // It could make space for the scrollbar but the scrollbar
+                // doesn't go into the tab bar region.
+                // It leaks the edge of the pulley menu.
+                // rightMargin: Theme.paddingSmall
             }
         }
     }
