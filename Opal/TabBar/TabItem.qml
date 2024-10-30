@@ -91,6 +91,7 @@ SilicaControl {
                 }
             }
         }
+    }
 
     Binding {
         target: !!flickable && flickable.pullDownMenu ?
