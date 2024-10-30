@@ -68,7 +68,8 @@ SilicaControl {
         property: "y"
         when: topMargin > 0
         value: flickable.originY
-               - flickable.pullDownMenu.height
+               - (!!flickable.pullDownMenu ?
+                      flickable.pullDownMenu.height : 0)
                - root.topMargin
                + (_page.orientation & Orientation.PortraitMask ?
                       0 : Theme.paddingMedium)
