@@ -38,10 +38,10 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-import Sailfish.Silica.private 1.0
-import "private/Util.js" as Util
+//import Sailfish.Silica.private 1.0
+import "Util.js" as Util
 
-SilicaMouseArea {
+/*Silica*/MouseArea {
     id: root
 
     property int tabIndex: (model && model.index !== undefined) ? model.index : -1
@@ -72,7 +72,7 @@ SilicaMouseArea {
     implicitHeight: Math.max(_portrait ? Theme.itemSizeLarge : Theme.itemSizeSmall,
                              contentColumn.implicitHeight + 2 * (_portrait ? Theme.paddingLarge : Theme.paddingMedium))
 
-    highlighted: pressed && containsMouse
+    property bool highlighted: pressed && containsMouse
 
     onClicked: {
         if (_tabView && tabIndex >= 0) {
@@ -80,19 +80,22 @@ SilicaMouseArea {
         }
     }
 
-    VariantInterpolator {
+    ColorInterpolator {
         id: colorInterpolator
 
-        from: root.palette.primaryColor
-        to: root.palette.highlightColor
+        from: Theme.primaryColor
+        to: Theme.highlightColor
 
         progress: {
-            if (!root._tabView || !root._tabItem) {
-                return 0
+            if (root.pressed) {
+                return 1.0
+            } else if (!root._tabView || !root._tabItem) {
+                return 0.0
             } else if (isCurrentTab && !root._tabView.dragging) {
-                return 1
+                return 1.0
             } else {
-                return 1 - Math.abs(root._tabItem.x / (root._tabView.width + root._tabView.horizontalSpacing))
+                // FIXME this is wrong
+                return Math.abs(1.0 - Math.abs(root._tabItem.x / (root._tabView.width + root._tabView.horizontalSpacing)))
             }
         }
     }
@@ -124,7 +127,7 @@ SilicaMouseArea {
             id: titleLabel
 
             x: (contentColumn.width - width) / 2
-            color: highlighted ? palette.highlightColor : colorInterpolator.value
+            color: highlighted ? Theme.highlightColor : colorInterpolator.value
             font.pixelSize: highlightImage.status === Image.Ready ? Theme.fontSizeTiny : root.titleFontSize
         }
     }
@@ -142,7 +145,7 @@ SilicaMouseArea {
 
         sourceComponent: Component {
             Rectangle {
-                color: root.palette.highlightBackgroundColor
+                color: Theme.highlightBackgroundColor
                 width: bubbleLabel.text ? Math.max(bubbleLabel.implicitWidth + Theme.paddingSmall*2, height) : Theme.paddingMedium + Theme.paddingSmall
                 height: bubbleLabel.text ? bubbleLabel.implicitHeight : Theme.paddingMedium + Theme.paddingSmall
                 radius: Theme.dp(2)
