@@ -4,3 +4,4 @@ module Opal.TabBar
 # SPDX-License-Identifier: GPL-3.0-or-later
 TabItem 1.0 TabItem.qml
 TabView 1.0 TabView.qml
+Tab 1.0 Tab.qml
