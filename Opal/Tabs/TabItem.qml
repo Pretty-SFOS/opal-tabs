@@ -34,14 +34,15 @@ SilicaControl {
     property bool _hasPullDownMenu: !!flickable && !!flickable.pullDownMenu
     property bool _hasPushUpMenu: !!flickable && !!flickable.pushUpMenu
 
-    implicitWidth: _tabContainer ? _tabContainer.PagedView.contentWidth : 0
+    implicitWidth: _tabContainer ? _tabContainer.PagedView.contentWidth : (
+        __silica_page.isPortrait ? Screen.width : Screen.height)
     implicitHeight: {
-        if (!_tabContainer) {
-            return 0
+        if (!_tabContainer || !_tabContainer.PagedView) {
+            return (__silica_page.isPortrait ? Screen.height : Screen.width)
+        } else if (flickable && flickable.pullDownMenu && _tabContainer.PagedView.view) {
+            return _tabContainer.PagedView.view.height
         } else {
-            var view = flickable && flickable.pullDownMenu ? _tabContainer.PagedView.view : null
-
-            return view ? view.height : _tabContainer.PagedView.contentHeight
+            return _tabContainer.PagedView.contentHeight
         }
     }
 
