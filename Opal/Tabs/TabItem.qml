@@ -58,10 +58,10 @@ SilicaControl {
         }
 
         if (!flickable) {
-            for (var child in children) {
-                if (child.hasOwnProperty('maximumFlickVelocity') &&
-                        !child.hasOwnProperty('__silica_hidden_flickable')) {
-                    flickable = child
+            for (var i=0; i<contents.length; i++) {
+                if (contents[i].hasOwnProperty('maximumFlickVelocity') &&
+                        !contents[i].hasOwnProperty('__silica_hidden_flickable')) {
+                    flickable = contents[i]
                     break
                 }
             }
