@@ -107,7 +107,8 @@ PagedView {
 
         property bool loading: Qt.application.active && isCurrentItem && status === /*Animated*/Loader.Loading
 
-        sourceComponent: model.modelData.body
+        sourceComponent: model.modelData ? model.modelData.body : model.body
+        source: model.modelData ? model.modelData.source : model.source
         asynchronous: true
 
         width: item ? item.implicitWidth : root.contentItem.width

@@ -12,4 +12,5 @@ QtObject {
     property string icon
 
     default property Component body
+    property url source
 }
