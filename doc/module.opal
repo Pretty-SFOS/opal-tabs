@@ -11,7 +11,7 @@
 #
 
 # current semantic version number, cf. https://semver.org
-version: 2.0.0
+version: 2.1.0
 
 # plain name as used in the module repository URL, will be prefixed with "opal-"
 # where necessary
@@ -32,14 +32,14 @@ description: This module provides an easy way to add tab bars to apps.
 
 # attribution string for the whole module, in the same form as a SPDX
 # FileCopyrightText entry.
-attribution: 2024 Mirian Margiani:2013-2020 Jolla Ltd:2020 Open Mobile Platform LLC
+attribution: 2024-2025 Mirian Margiani:2025 roundedrectangle:2013-2020 Jolla Ltd:2020 Open Mobile Platform LLC
 
 # colon-separated list of this module's current maintainer(s)
 maintainers: Mirian Margiani
 
 # colon-separated list of this module's author(s) and contributors
 # this list should be exhaustive
-authors: Mirian Margiani
+authors: Mirian Margiani:roundedrectangle
 
 # the module's SPDX license id, cf. https://spdx.org/licenses/
 mainLicenseSpdx: GPL-3.0-or-later
