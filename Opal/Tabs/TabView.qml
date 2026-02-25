@@ -28,6 +28,9 @@ PagedView {
     property alias tabBarItem: tabBarLoader.item
     property real tabBarHeight: tabBarItem && tabBarVisible ?
                                     tabBarItem.height : 0
+    
+    property Component tabComponent
+    property url tabSource
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
@@ -107,8 +110,13 @@ PagedView {
 
         property bool loading: Qt.application.active && isCurrentItem && status === /*Animated*/Loader.Loading
 
-        sourceComponent: model.modelData ? model.modelData.body : model.body
-        source: model.modelData ? model.modelData.source : model.source
+        // this is needed for accessing model and index from the component
+        property var tabModel: model.modelData || model
+        property int tabIndex: index
+
+        property bool _haveSource: tabModel.body || tabModel.source
+        sourceComponent: _haveSource ? tabModel.body : tabComponent
+        source: _haveSource ? tabModel.source : tabSource
         asynchronous: true
 
         width: item ? item.implicitWidth : root.contentItem.width
