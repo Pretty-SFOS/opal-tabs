@@ -111,7 +111,7 @@ PagedView {
         property bool loading: Qt.application.active && isCurrentItem && status === /*Animated*/Loader.Loading
 
         // this is needed for accessing model and index from the component
-        property var tabModel: model.modelData || model
+        property var tabModel: !!(model.modelData || model)
         property int tabIndex: index
 
         property bool _haveSource: tabModel.body || tabModel.source
