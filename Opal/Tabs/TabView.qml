@@ -31,6 +31,7 @@ PagedView {
 
     property size defaultTabIconSourceSize
     property color defaultTabIconColor
+    property color defaultTabIconHighlightColor
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
@@ -68,6 +69,7 @@ PagedView {
             model: root.model
             defaultIconSourceSize: defaultTabIconSourceSize
             defaultIconColor: defaultTabIconColor
+            defaultIconHighlightColor: defaultTabIconHighlightColor
         }
     }
 

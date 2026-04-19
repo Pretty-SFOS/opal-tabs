@@ -51,9 +51,11 @@ SilicaControl {
     property string iconRole: "icon"
     property string iconSourceSizeRole: "iconSourceSize"
     property string iconColorRole: "iconColor"
+    property string iconHighlightColorRole: "iconHighlightColor"
 
     property size defaultIconSourceSize
     property color defaultIconColor
+    property color defaultIconHighlightColor
 
     height: flickable.height
 
@@ -143,6 +145,7 @@ SilicaControl {
                     icon.source: model[root.iconRole] || ""
                     icon.sourceSize: model[root.iconSourceSizeRole] || defaultIconSourceSize
                     icon.color: model[root.iconColorRole] || defaultIconColor
+                    icon.highlightColor: model[root.iconHighlightColorRole] || defaultIconHighlightColor
                     count: model[root.countRole] || ""
                 }
             }
