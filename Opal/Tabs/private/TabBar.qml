@@ -143,10 +143,30 @@ SilicaControl {
                     title: model[root.titleRole] || ""
                     description: model[root.descriptionRole] || ""
                     icon.source: model[root.iconRole] || ""
-                    icon.sourceSize: model[root.iconSourceSizeRole] || defaultIconSourceSize
-                    icon.color: model[root.iconColorRole] || defaultIconColor
-                    icon.highlightColor: model[root.iconHighlightColorRole] || defaultIconHighlightColor
                     count: model[root.countRole] || ""
+
+                    property var suggestedIconSourceSize: model[root.iconSourceSize] || root.defaultIconSourceSize
+                    property var suggestedIconColor: model[root.iconColorRole] || root.defaultIconColor
+                    property var suggestedIconHighlightColor: model[root.iconHighlightColorRole] || root.defaultIconHighlightColor
+                    
+                    Binding {
+                        target: icon
+                        property: 'sourceSize'
+                        value: suggestedIconSourceSize
+                        when: !!suggestedIconSourceSize
+                    }
+                    Binding {
+                        target: icon
+                        property: 'color'
+                        value: suggestedIconColor
+                        when: !!suggestedIconColor
+                    }
+                    Binding {
+                        target: icon
+                        property: 'highlightColor'
+                        value: suggestedIconHighlightColor
+                        when: !!suggestedIconHighlightColor
+                    }
                 }
             }
         }
