@@ -1,5 +1,5 @@
 //@ This file is part of Opal.Tabs.
-//@ SPDX-FileCopyrightText: 2024 Mirian Margiani
+//@ SPDX-FileCopyrightText: 2026 roundedrectangle, 2024 Mirian Margiani
 //@ SPDX-FileCopyrightText: Copyright (C) 2019 Jolla Ltd.
 //@ SPDX-FileCopyrightText: Copyright (C) 2020 Open Mobile Platform LLC.
 //@ SPDX-License-Identifier: GPL-3.0-or-later
