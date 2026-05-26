@@ -29,9 +29,7 @@ PagedView {
     property real tabBarHeight: tabBarItem && tabBarVisible ?
                                     tabBarItem.height : 0
 
-    property size defaultTabIconSourceSize
-    property color defaultTabIconColor
-    property color defaultTabIconHighlightColor
+    property alias tabIcon: tabIconProxy
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
@@ -62,14 +60,18 @@ PagedView {
         property int _ctxBottomMargin: _tabBarIsTop ? 0 : tabBarHeight
     }
 
+    TabIconProxy {
+        id: tabIconProxy
+    }
+
     Component {
         id: tabBarComponent
 
         TabBar {
             model: root.model
-            defaultIconSourceSize: defaultTabIconSourceSize
-            defaultIconColor: defaultTabIconColor
-            defaultIconHighlightColor: defaultTabIconHighlightColor
+            defaultIconSourceSize: tabIconProxy.sourceSize
+            defaultIconColor: tabIconProxy.color
+            defaultIconHighlightColor: tabIconProxy.highlightColor
         }
     }
 
