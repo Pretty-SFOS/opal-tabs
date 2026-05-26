@@ -29,7 +29,7 @@ PagedView {
     property real tabBarHeight: tabBarItem && tabBarVisible ?
                                     tabBarItem.height : 0
 
-    property alias tabIcon: tabIconProxy
+    property alias tabIcons: tabIconProxy
 
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
