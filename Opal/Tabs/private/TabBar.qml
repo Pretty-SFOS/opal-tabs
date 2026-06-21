@@ -1,5 +1,5 @@
 //@ This file is part of Opal.Tabs.
-//@ SPDX-FileCopyrightText: 2024 Mirian Margiani
+//@ SPDX-FileCopyrightText: 2026 roundedrectangle, 2024 Mirian Margiani
 //@ SPDX-FileCopyrightText: Copyright (C) 2020 Open Mobile Platform LLC.
 //@ SPDX-License-Identifier: GPL-3.0-or-later
 //@ Original license: BSD-3-Clause (see separate license file SILICA-LICENSE)
@@ -49,6 +49,13 @@ SilicaControl {
     property string descriptionRole: "description"
     property string countRole: "count"
     property string iconRole: "icon"
+    property string iconSourceSizeRole: "iconSourceSize"
+    property string iconColorRole: "iconColor"
+    property string iconHighlightColorRole: "iconHighlightColor"
+
+    property size defaultIconSourceSize
+    property color defaultIconColor
+    property color defaultIconHighlightColor
 
     height: flickable.height
 
@@ -137,6 +144,29 @@ SilicaControl {
                     description: model[root.descriptionRole] || ""
                     icon.source: model[root.iconRole] || ""
                     count: model[root.countRole] || ""
+
+                    property var suggestedIconSourceSize: model[root.iconSourceSize] || root.defaultIconSourceSize
+                    property var suggestedIconColor: model[root.iconColorRole] || root.defaultIconColor
+                    property var suggestedIconHighlightColor: model[root.iconHighlightColorRole] || root.defaultIconHighlightColor
+                    
+                    Binding {
+                        target: icon
+                        property: 'sourceSize'
+                        value: suggestedIconSourceSize
+                        when: !!suggestedIconSourceSize
+                    }
+                    Binding {
+                        target: icon
+                        property: 'color'
+                        value: suggestedIconColor
+                        when: !!suggestedIconColor
+                    }
+                    Binding {
+                        target: icon
+                        property: 'highlightColor'
+                        value: suggestedIconHighlightColor
+                        when: !!suggestedIconHighlightColor
+                    }
                 }
             }
         }

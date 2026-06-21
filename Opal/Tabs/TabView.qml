@@ -1,5 +1,5 @@
 //@ This file is part of Opal.Tabs.
-//@ SPDX-FileCopyrightText: 2024 Mirian Margiani
+//@ SPDX-FileCopyrightText: 2026 roundedrectangle, 2024 Mirian Margiani
 //@ SPDX-FileCopyrightText: Copyright (C) 2019 Jolla Ltd.
 //@ SPDX-FileCopyrightText: Copyright (C) 2020 Open Mobile Platform LLC.
 //@ SPDX-License-Identifier: GPL-3.0-or-later
@@ -32,6 +32,8 @@ PagedView {
     property Component tabComponent
     property url tabSource
 
+    property alias tabIcons: tabIconProxy
+
     property real yOffset: currentItem && currentItem._yOffset || 0
     property bool _headerBackgroundVisible: true
 
@@ -61,11 +63,18 @@ PagedView {
         property int _ctxBottomMargin: _tabBarIsTop ? 0 : tabBarHeight
     }
 
+    TabIconProxy {
+        id: tabIconProxy
+    }
+
     Component {
         id: tabBarComponent
 
         TabBar {
             model: root.model
+            defaultIconSourceSize: tabIconProxy.sourceSize
+            defaultIconColor: tabIconProxy.color
+            defaultIconHighlightColor: tabIconProxy.highlightColor
         }
     }
 
